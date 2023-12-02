@@ -4,9 +4,19 @@ const THRESHOLD: u32 = '9' as u32 + 1;
 macro_rules! print_char {
     ($ch:literal) => {
         println!(" ___ {}", $ch);
-        println!("(u32: {}, i32: {}) -> {}", $ch as u32, $ch as i32, $ch as i32 - THRESHOLD as i32);
+        println!(
+            "(u32: {}, i32: {}) -> {}",
+            $ch as u32,
+            $ch as i32,
+            $ch as i32 - THRESHOLD as i32
+        );
         println!("is number: {}", ($ch as u32) < (THRESHOLD as u32));
-        println!("(u8: {}, i8: {}) -> {}", $ch as u8, $ch as i8, $ch as i8 - THRESHOLD as i8);
+        println!(
+            "(u8: {}, i8: {}) -> {}",
+            $ch as u8,
+            $ch as i8,
+            $ch as i8 - THRESHOLD as i8
+        );
         println!("is number: {}", ($ch as u8) < (THRESHOLD as u8));
         println!("");
     };
@@ -24,7 +34,7 @@ fn check_unicode() {
 }
 
 fn is_number(c: char) -> bool {
-    (c as u32) < THRESHOLD 
+    (c as u32) < THRESHOLD
 }
 
 pub fn get_line_number(line: &str) -> u32 {

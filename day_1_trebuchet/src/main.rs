@@ -8,13 +8,12 @@ mod part2;
 use part2::get_line_number as part2_get_line_number;
 
 fn main() -> io::Result<()> {
-
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let result = reader.lines().fold(0, |acc, line| {
-        acc + part2_get_line_number(&line.unwrap())
-    });
+    let result = reader
+        .lines()
+        .fold(0, |acc, line| acc + part2_get_line_number(&line.unwrap()));
 
     println!("{}", result);
 
