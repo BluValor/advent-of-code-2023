@@ -1,6 +1,6 @@
 use crate::common::{Draw, Game};
 
-pub fn get_game_number(game: Game, game_index: u32) -> u32 {
+pub fn get_game_number(game: Game) -> u32 {
     let mut min_draw = Draw { r: 0, g: 0, b: 0 };
     game.draws.iter().for_each(|draw| {
         min_draw.r = u32::max(min_draw.r, draw.r);

@@ -44,20 +44,12 @@ fn main() -> io::Result<()> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let default_draw = Draw {
-        r: 12,
-        g: 13,
-        b: 14,
-    };
-
     let result = reader.lines().enumerate().fold(0, |acc, (i, line)| {
-        let game_index = (i + 1) as u32;
         let line = line.unwrap();
         let game = parse_game(&line);
-        let is_game_possible = game.draws.iter().all(|draw| default_draw.contains(draw));
-        let to_add = if is_game_possible { game_index } else { 0 };
+        let game_index = (i + 1) as u32;
         // acc + part1_get_game_number(game, game_index)
-        acc + part2_get_game_number(game, game_index)
+        acc + part2_get_game_number(game)
     });
 
     println!("{}", result);
