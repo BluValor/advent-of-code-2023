@@ -1,12 +1,14 @@
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 
-#[derive(Debug)]
-struct Card {
-    index: u32,
-    winning: Vec<u32>,
-    guessed: Vec<u32>,
-}
+mod common;
+use common::Card;
+
+mod part1;
+use part1::get_points as part1_get_points;
+
+mod part2;
+use part2::get_points as part2_get_points;
 
 fn parse_line(line: &str) -> Card {
     let mut line_split = line.split(": ");
@@ -33,26 +35,13 @@ fn parse_line(line: &str) -> Card {
     }
 }
 
-fn get_points(card: Card) -> u32 {
-    let mut intersection_size = 0;
-    for guess in card.guessed {
-        if card.winning.contains(&guess) {
-            intersection_size += 1;
-        }
-    }
-    if intersection_size == 0 {
-        return 0;
-    } else {
-        return 2_u32.pow(intersection_size - 1);
-    }
-}
-
 fn main() -> io::Result<()> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let cards = reader.lines().map(|line| parse_line(&line.unwrap()));
-    let points = cards.fold(0, |acc, card| acc + get_points(card));
+    let cards: Vec<Card> = reader.lines().map(|line| parse_line(&line.unwrap())).collect();
+    // let points = part1_get_points(&cards);
+    let points = part2_get_points(&cards);
 
     println!("{}", points);
 
